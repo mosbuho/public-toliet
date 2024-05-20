@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-import Controller.DataBaseUtill;
+import Controller.APIUtill;
 import View.MainMenu;
 
 public class PublicToiletMain {
@@ -9,11 +9,13 @@ public class PublicToiletMain {
         int menu = 0;
         while (true) {
             MainMenu.mainView();
-            try {menu = Integer.parseInt(sc.nextLine());} 
-            catch (NumberFormatException e) {}
+            try {
+                menu = Integer.parseInt(sc.nextLine());
+            } catch (NumberFormatException e) {
+            }
             switch (menu) {
                 case 1:
-                    
+                    APIUtill.getConnection();
                     break;
                 case 2:
 
@@ -22,6 +24,8 @@ public class PublicToiletMain {
 
                     break;
                 case 4:
+                    break;
+                case 5:
                     sc.close();
                     return;
                 default:
