@@ -64,7 +64,7 @@ public class PublicToilet {
     @Override
     public String toString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        return String.format("이름 : %s, 주소 : %s, 남여 공용 : %s, 개방 시간 : %s, 데이터 생성일 : %s",
+        return String.format("이름 : %s, 주소 : %s, 남여 공용 : %s, 개방 시간 : %s, 데이터 생성일 : %s\n",
                 name, addr, mfUse, openTime.equals(":~:") ? "24시간" : openTime,
                 sourceDate != null ? dateFormat.format(sourceDate) : "null");
     }

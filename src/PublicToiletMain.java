@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
-import Controller.APIUtill;
+import Controller.PublicToiletDAO;
+import Controller.PublicToiletManager;
 import View.MainMenu;
 
 public class PublicToiletMain {
@@ -9,21 +10,19 @@ public class PublicToiletMain {
         int menu = 0;
         while (true) {
             MainMenu.mainView();
-            try {
-                menu = Integer.parseInt(sc.nextLine());
-            } catch (NumberFormatException e) {
-            }
+            menu = Integer.parseInt(sc.nextLine());
             switch (menu) {
                 case 1:
-                    APIUtill.getConnection();
+                    PublicToiletManager.getToilets(sc);
                     break;
                 case 2:
-
+                    PublicToiletDAO.insertToilets();
                     break;
                 case 3:
-
+                    PublicToiletDAO.deleteToilets();
                     break;
                 case 4:
+                    PublicToiletManager.searchToilets(sc);
                     break;
                 case 5:
                     sc.close();

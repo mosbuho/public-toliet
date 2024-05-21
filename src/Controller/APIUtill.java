@@ -29,7 +29,10 @@ import org.xml.sax.SAXException;
 import Model.PublicToilet;
 
 public class APIUtill {
-    public static ArrayList<PublicToilet> getConnection() {
+    public static ArrayList<PublicToilet> getToilets(String pIndex) {
+        if (pIndex.equals("0")) {
+            pIndex = "1";
+        }
         ArrayList<PublicToilet> list = new ArrayList<>();
         String filePath = "key.properties";
         StringBuilder urlBuilder = new StringBuilder(
@@ -43,9 +46,9 @@ public class APIUtill {
             urlBuilder.append("&" + URLEncoder.encode("Type", "UTF-8") + "="
                     + URLEncoder.encode("XML", "UTF-8"));
             urlBuilder.append("&" + URLEncoder.encode("pIndex", "UTF-8") + "="
-                    + URLEncoder.encode("1", "UTF-8"));
+                    + URLEncoder.encode(pIndex, "UTF-8"));
             urlBuilder.append("&" + URLEncoder.encode("pSize", "UTF-8") + "="
-                    + URLEncoder.encode("50", "UTF-8"));
+                    + URLEncoder.encode("1000", "UTF-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {
@@ -106,10 +109,6 @@ public class APIUtill {
                 }
                 list.add(publictoilet);
             }
-            for (PublicToilet e : list) {
-                System.out.println(e);
-            }
-
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
