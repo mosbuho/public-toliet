@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import Model.PublicToilet;
 
@@ -15,6 +16,10 @@ public class PublicToiletDAO {
         ArrayList<PublicToilet> ptList = null;
         try (Connection conn = DataBaseUtill.getConnection()) {
             PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            Random random = new Random();
+            int percent = 0;
+            int randomVal = 0;
             for (int i = 1; i < 12; i++) {
                 ptList = APIUtill.getToilets(String.format("%d", i));
                 for (PublicToilet pt : ptList) {
@@ -25,7 +30,12 @@ public class PublicToiletDAO {
                     pstmt.setDate(5, new Date(pt.getSourceDate().getTime()));
                     pstmt.addBatch();
                 }
-                System.out.println(String.format("%dp 저장", i));
+                randomVal = random.nextInt(7) + 6;
+                percent += randomVal;
+                if (i == 11) {
+                    percent = 100;
+                }
+                System.out.println(String.format("%d%%", percent));
             }
             pstmt.executeBatch();
             System.out.println("저장 끝");
